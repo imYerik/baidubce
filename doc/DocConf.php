@@ -17,8 +17,8 @@
 error_reporting(-1);
 
 $my_credentials = array(
-		'ak' => '4b7b41c9d0844b38jeac1521d7c943d4',
-		'sk' => '70009e8486c94l7788012bf1d3475ca6',
+		'ak' => '',
+		'sk' => '',
 );
 $g_doc_configs = array(
 		'credentials' => $my_credentials,
