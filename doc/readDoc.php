@@ -6,9 +6,9 @@ global $g_doc_configs;
 global $my_credentials;
 
 //阅读文档
-$documentId = "doc-ggxmftuji7p14xv";
+$documentId = "doc-ggxp19hevijd40c";
 $host= $g_doc_configs['endpoint'];
-$path = "/v2/document".$documentId;
+$path = "/v2/document/".$documentId;
 $method = "GET";
 $parms = array("read"=>"");
 date_default_timezone_set('UTC');
