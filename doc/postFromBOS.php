@@ -5,12 +5,12 @@ require 'BceSign.php';
 global $g_doc_configs;
 global $my_credentials;
 
-//注册文档
+//根据BOS Object创建文档
 
 $host= $g_doc_configs['endpoint'];
 $path = "/v2/document";
 $method = "POST";
-$parms = array("register"=>"");
+$parms = array("source"=>"bos");
 date_default_timezone_set('UTC');
 $timestamp = date("Y-m-d") . "T" . date("H:i:s") . "Z";
 $Authorization = getSigner($host,$method,$path, $parms, $timestamp);
@@ -27,7 +27,18 @@ $head = array(
 );
 
 //传入需要注册的文档格式和名称
-$data = array("title"=>"my_test_doc","format"=>"doc");
+//$data = array(
+  //  "bucket"=>"yerik-doc",
+  //  "object"=>"iOS_zh.pdf",
+  //  "title"=>"iOS_zh_doc",
+  //  "format"=>"pdf",
+//);
+$data = array(
+    "bucket"=>"yerik-doc",
+    "object"=>"README.txt",
+    "title"=>"README",
+    "format"=>"txt",
+);
 $data_string = json_encode($data);
 
 

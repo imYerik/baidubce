@@ -17,8 +17,8 @@
 error_reporting(-1);
 
 $my_credentials = array(
-		'ak' => '',
-		'sk' => '',
+		'ak' => '',    //修改成自己的BCE AK
+		'sk' => '',    //修改成自己的BCE SK
 );
 $g_doc_configs = array(
 		'credentials' => $my_credentials,

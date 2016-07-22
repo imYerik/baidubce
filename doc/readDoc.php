@@ -5,12 +5,12 @@ require 'BceSign.php';
 global $g_doc_configs;
 global $my_credentials;
 
-//注册文档
-
+//阅读文档
+$documentId = "doc-ggxmftuji7p14xv";
 $host= $g_doc_configs['endpoint'];
-$path = "/v2/document";
-$method = "POST";
-$parms = array("register"=>"");
+$path = "/v2/document".$documentId;
+$method = "GET";
+$parms = array("read"=>"");
 date_default_timezone_set('UTC');
 $timestamp = date("Y-m-d") . "T" . date("H:i:s") . "Z";
 $Authorization = getSigner($host,$method,$path, $parms, $timestamp);
@@ -26,8 +26,7 @@ $head = array(
     "x-bce-date:{$timestamp}",
 );
 
-//传入需要注册的文档格式和名称
-$data = array("title"=>"my_test_doc","format"=>"doc");
+$data = array();
 $data_string = json_encode($data);
 
 
@@ -37,7 +36,7 @@ $curlp = curl_init();
 curl_setopt($curlp, CURLOPT_URL, $url);
 curl_setopt($curlp, CURLOPT_HTTPHEADER, $head);
 curl_setopt($curlp, CURLOPT_POSTFIELDS, $data_string);
-curl_setopt($curlp, CURLOPT_POST, 1);
+curl_setopt($curlp, CURLOPT_POST, 0);
 curl_setopt($curlp, CURLOPT_RETURNTRANSFER, 1);
 $output = curl_exec($curlp);
 curl_close($curlp);

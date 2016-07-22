@@ -5,7 +5,7 @@ require 'BceSign.php';
 global $g_doc_configs;
 global $my_credentials;
 
-//根据BOS Object创建文档
+//列出账号下的所有文档
 
 $host= $g_doc_configs['endpoint'];
 $path = "/v2/document";
