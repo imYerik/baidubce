@@ -8,7 +8,7 @@ global $my_credentials;
 //根据文档ID获取相应的文档信息,如状态、创建时间、标题等
 
 //$documentId="doc-ggxmftuji7p14xv";
-$documentId="doc-ggxmvgqjkmh58r7";
+$documentId="doc-ggxtbmzhwxh0y02";
 $host= $g_doc_configs['endpoint'];
 $path = "/v2/document/".$documentId;
 $method = "GET";

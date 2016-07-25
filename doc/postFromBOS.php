@@ -36,7 +36,7 @@ $head = array(
 $data = array(
     "bucket"=>"yerik-doc",
     "object"=>"README.txt",
-    "title"=>"README",
+    "title"=>"README3",
     "format"=>"txt",
 );
 $data_string = json_encode($data);
