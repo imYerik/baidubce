@@ -1,0 +1,18 @@
+<html>
+<head>
+<title>文件上传表单</title>
+</head>
+<body>
+<h3>文件上传：</h3>
+选择一个文件上传: <br />
+<form action="/createMedia" method="post" enctype="multipart/form-data">
+<label>媒资标题:</label><input type="text" name="title" />
+<br />
+<label>媒资描述:</label><input type="text" name="description" />
+<br />
+<input type="file" name="upload" multiple="multiple"/>
+<br />
+<input type="submit" value="上传文件" />
+</form>
+</body>
+</html>
