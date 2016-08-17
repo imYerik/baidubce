@@ -6,7 +6,9 @@ $ npm install formidable
 $ npm install express
 
 
-二、运行vod_main.js
+二、运行demo
+修改config.js文件中ak、sk为自己开放云账号的ak、sk;
+运行vod_main.js
 $ node vod_main.js
 
 
