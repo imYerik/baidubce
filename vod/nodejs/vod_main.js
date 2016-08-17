@@ -7,16 +7,29 @@ var fs = require("fs");
 var app = express();
 var formidable = require("formidable");
 
-//  主页输出 "Hello World"
+//  主页GET请求默认跳转到媒资列表
+app.get('/', function (req, res) {
+   console.log("主页 GET 请求");
+   res.redirect(301,'/listMedias');
+})
+//上传页面
 app.get('/upload.html', function (req, res) {
    console.log("上传文件请求");
    res.sendFile( __dirname + "/" + "upload.html" ); 
 })
 
-//  POST 请求
-app.post('/', function (req, res) {
-   console.log("主页 POST 请求");
-   res.send('Hello POST');
+//播放页面
+app.get('/player.html', function (req, res) {
+   console.log("播放请求");
+   res.sendFile( __dirname + "/" + "player.html" ); 
+})
+app.get('/player/cyberplayer.js', function (req, res) {
+   console.log("加载cyberplayer.js文件");
+   res.sendFile( __dirname + "/" + "player/cyberplayer.js" ); 
+})
+app.get('/player/cyberplayer.flash.swf', function (req, res) {
+   console.log("加载cyberplayer.flash.swf文件");
+   res.sendFile( __dirname + "/" + "player/cyberplayer.flash.swf" ); 
 })
 
 //  /deleteMedia页面响应
@@ -27,12 +40,15 @@ app.delete('/deleteMedia', function (req, res) {
    client.deleteMediaResource(mediaId)
     .then(function (response) {
         // 删除成功
+        var body = response.body;
         console.log(response)
-        res.send(mediaId + '删除成功'); 
+        res.send(body);
+        //res.send(mediaId + '删除成功'); 
     })
     .catch(function (error) {
         console.log(error);
         // 删除错误
+        res.send(error);
     });
 })
 
@@ -51,7 +67,7 @@ app.get('/listMedias', function (req, res) {
     .catch(function (error) {
         console.log(error);
         // 查询错误
-        //res.send(error);
+        res.send(error);
     });
 })
 
@@ -71,6 +87,7 @@ app.get('/getMediaInfo', function(req, res) {
     .catch(function (error) {
         console.log(error);
         // 查询错误
+        res.send(error);
     });
 })
 
@@ -95,7 +112,7 @@ app.post('/createMedia',function(req,res){
                  .catch(function (error) {
                      console.log(error);
                      // 上传错误
-                     res.send('上传失败!');
+                     res.send(error);
                  });
            });
         
@@ -116,6 +133,7 @@ app.post('/stopMediaResource',function(req,res){
     .catch(function (error) {
         console.log(error);
         // 查询错误
+        res.send(error);
     }); 
 })
 
@@ -133,6 +151,20 @@ app.post('/publishMediaResource',function(req,res){
     .catch(function (error) {
         console.log(error);
         // 查询错误
+        res.send(error);
+    });
+})
+
+//通过媒资ID播放媒资
+app.get('/playMedia',function(req,res){
+    console.log('/playMedia GET请求');
+    var mediaId = req.query.mediaId;
+    client.getPlayableUrl(mediaId)
+    .then(function (response) {
+        var body = response.body;
+        console.log(body);
+        //res.send(body);
+        res.redirect(301,'/player.html?file='+response.body.result.file);
     });
 })
 
@@ -147,6 +179,7 @@ app.get('/getPlayableUrl',function(req,res){
         res.send(body);
     });
 })
+
 
 //获取播放代码
 app.get('/getPlayerCode',function(req,res){

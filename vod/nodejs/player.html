@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo: play mp4 video</title>
+</head>
+<body>
+    <div id="playercontainer"></div>
+    <script type="text/javascript" src="./player/cyberplayer.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+
+    <script type="text/javascript">
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+
+        var file = getUrlParam('file');
+        var player = cyberplayer("playercontainer").setup({
+            width: 1080,
+            height: 720,
+            stretching: "uniform",
+            file: file,
+            //fallbackfile:"http://bktmga4kjr6jcjrgi63m.exp.bcelive.com/lss-gb3hgrn1ic4thgh4/live.m3u8",
+            autostart: true,
+            repeat: false,
+            volume: 100,
+            controls: true,
+            ak: 'cca75974c3134bc1877ad3663b1d197d' // 公有云平台注册即可获得accessKey
+        });
+    </script>
+</body>
+</html>
