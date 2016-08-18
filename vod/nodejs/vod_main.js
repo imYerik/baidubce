@@ -155,6 +155,28 @@ app.post('/publishMediaResource',function(req,res){
     });
 })
 
+//更新媒资title和description
+app.put('/updateMediaResource',function(req,res){
+    console.log('/updateMediaResource POST请求');
+    var mediaId = req.query.mediaId;
+    var title = req.query.title;
+    var description = req.query.description;
+    
+    client.updateMediaResource(mediaId, title,description)
+    .then(function (response) {
+        // 更新成功
+        console.log(response)
+        res.send(response.body);
+    })
+    .catch(function (error) {
+        console.log(error);
+        // 更新错误
+        res.send(error);
+    });
+})
+
+
+
 //通过媒资ID播放媒资
 app.get('/playMedia',function(req,res){
     console.log('/playMedia GET请求');

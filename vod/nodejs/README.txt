@@ -6,9 +6,7 @@ $ npm install formidable
 $ npm install express
 
 
-二、运行demo
-修改config.js文件中ak、sk为自己开放云账号的ak、sk;
-运行vod_main.js
+二、运行vod_main.js
 $ node vod_main.js
 
 
@@ -18,6 +16,7 @@ $ node vod_main.js
 删除媒资：DELETE /deleteMedia?mediaId=mda-gggdqvb92w85jd1u
 停用媒资：POST /stopMediaResource?mediaId=mda-ghmm4a9jgxb7cwr9
 发布媒资：POST /publishMediaResource?mediaId=mda-ghmm4a9jgxb7cwr9
+更新媒资title & description：PUT /updateMediaResource?mediaId=mda-ghsj882a4x0as9k5&title="newtitle"&description="new description"
 获取播放代码：/getPlayerCode?mediaId=mda-ghmm4a9jgxb7cwr9&width=480&height=320&autoStart=true
 获取播放url：GET /getPlayableUrl?mediaId=mda-ghmm4a9jgxb7cwr9
 播放媒资：GET /playMedia?mediaId=mda-gbbhmgupzx9f1h0m
@@ -147,4 +146,9 @@ http://xxx.xxx.xxx.xxx:8888/getPlayableUrl
 10、播放媒资(可直接跳转到Baidu Web播放器页面)：
 http://xxx.xxx.xxx.xxx:8888/playMedia
 http://xxx.xxx.xxx:8888/playMedia?mediaId=mda-gbbhmgupzx9f1h0m
+
+11、更新媒资title & description
+http://xxx.xxx.xxx:8888/updateMediaResource
+请求示例：PUT /updateMediaResource?mediaId=mda-ghsj882a4x0as9k5&title="newtitle"&description="new description"
+响应示例：无
 
