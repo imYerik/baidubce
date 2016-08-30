@@ -12,6 +12,7 @@ $ node vod_main.js
 
 三、接口概览
 列出媒资：GET /listMedias
+申请媒资：POST /applyMedia
 获取媒资信息：GET /getMediaInfo?mediaId=mda-gggdqvb92w85jd1u 
 删除媒资：DELETE /deleteMedia?mediaId=mda-gggdqvb92w85jd1u
 停用媒资：POST /stopMediaResource?mediaId=mda-ghmm4a9jgxb7cwr9
@@ -152,3 +153,13 @@ http://xxx.xxx.xxx:8888/updateMediaResource
 请求示例：PUT /updateMediaResource?mediaId=mda-ghsj882a4x0as9k5&title="newtitle"&description="new description"
 响应示例：无
 
+12、申请媒资
+http://xxx.xxx.xxx:8888/applyMedia
+请求示例：POST /applyMedia
+响应示例：
+{
+  "mediaId": "mda-gh5i2edfcidkn231",
+  "sourceBucket": "vod-gbad9zpgd9kthjhd",
+  "sourceKey": "vod-gbad9zpgd9kthjhd/mda-gh5i2edfcidkn231",
+  "host": "bj.bcebos.com"
+}
