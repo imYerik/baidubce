@@ -91,6 +91,19 @@ app.get('/getMediaInfo', function(req, res) {
     });
 })
 
+//申请媒资
+app.post('/applyMedia',function(req,res){
+    console.log("/applyMedia POST请求");
+    client._generateMediaId()
+      .then(function(response){
+         console.log(response.body);
+         res.send(response.body);
+      })
+      .catch(function(error){
+          res.send(error);
+      });
+})
+
 //上传并创建媒资
 app.post('/createMedia',function(req,res){
     console.log("/createMedia POST请求");
