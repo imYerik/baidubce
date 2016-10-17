@@ -1,15 +1,18 @@
 package com.baidu.cloudservice.sts;
 
+import java.io.File;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import com.baidubce.BceClientConfiguration;
 import com.baidubce.auth.DefaultBceCredentials;
 import com.baidubce.auth.DefaultBceSessionCredentials;
 import com.baidubce.services.bos.BosClient;
 import com.baidubce.services.bos.BosClientConfiguration;
 import com.baidubce.services.bos.model.BosObjectSummary;
+import com.baidubce.services.bos.model.GetObjectRequest;
 import com.baidubce.services.bos.model.ListObjectsResponse;
+import com.baidubce.services.bos.model.ObjectMetadata;
+import com.baidubce.services.bos.model.PutObjectResponse;
 import com.baidubce.services.sts.StsClient;
 import com.baidubce.services.sts.model.GetSessionTokenRequest;
 import com.baidubce.services.sts.model.GetSessionTokenResponse;
@@ -55,13 +58,15 @@ public class stsTest {
 		acl.put("effect", "Allow");
 		
 		JSONArray bucketList = new JSONArray();
-		bucketList.put("yerikbucket007");
-		bucketList.put("yerikbucket008");
+		bucketList.put("yerikbucket007/*");    //getObject用到
+		bucketList.put("yerikbucket007");      //listObject用到
 		acl.put("resource", bucketList);
 
 		JSONArray permissionList = new JSONArray();
 		permissionList.put("READ");
-		permissionList.put("LIST");
+		permissionList.put("WRITE");
+		permissionList.put("LIST");		
+
 		acl.put("permission", permissionList);
 		
 		accessControlList.put(acl);
@@ -78,19 +83,31 @@ public class stsTest {
 		System.out.println(stsCredentials.toString());
 		
 		
-//		BOS测试STS验证；
-		
+//		BOS测试STS验证；	
 		BosClientConfiguration bosconfig = new BosClientConfiguration();    // 初始化一个带有STS验证的BosClient
 		bosconfig.setEndpoint("http://bj.bcebos.com");
 		bosconfig.setCredentials(new DefaultBceSessionCredentials(stsCredentials.getAccessKeyId(),stsCredentials.getSecretAccessKey(), stsCredentials.getSessionToken()));    //STS返回的临时AK/SK及Token
 		BosClient bosClient = new BosClient(bosconfig);
 		
-//		测试LIST Bucket权限
-		
+//		测试LIST Object权限		
 		ListObjectsResponse listObjResp = bosClient.listObjects("yerikbucket007");
 		for (BosObjectSummary objectSummary : listObjResp.getContents()) {
 	        System.out.println("ObjectKey: " + objectSummary.getKey());
 	    }	
+		
+//		测试getObject权限
+		GetObjectRequest getObjectRequest = new GetObjectRequest("yerikbucket007","test.png");
+		ObjectMetadata objectMetadata = bosClient.getObject(getObjectRequest, new File("/Users/yerik/Downloads/","test1.png"));
+
+		
+//		测试PutObject权限
+		// 获取指定文件
+	    File file = new File("/Users/yerik/Downloads/test1.png");
+	    // 以文件形式上传Object
+	    PutObjectResponse putObjectFromFileResponse = bosClient.putObject("yerikbucket007", "test2.png", file);
+	    // 打印ETag
+	    System.out.println(putObjectFromFileResponse.getETag());
+		
 
 	}
 
