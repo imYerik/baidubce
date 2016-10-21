@@ -17,8 +17,8 @@
 error_reporting(-1);
 
 $my_credentials = array(
-		'ak' => '4b7b21c9d0844b388eac1521d7c943d4',    //修改成自己的BCE AK
-		'sk' => '70005e84e6c9497788012bf1d3475ca6',    //修改成自己的BCE SK
+		'ak' => '6ecae183846a4d99a3a70dd749bb4b3d',    //修改成自己的BCE AK
+		'sk' => '8d19c90d43f34a37a503fb0e332036e8',    //修改成自己的BCE SK
 );
 $g_doc_configs = array(
 		'credentials' => $my_credentials,

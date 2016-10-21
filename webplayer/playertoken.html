@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MP4 video file</title>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="../player/cyberplayer.js"></script>
+</head>
+<body>
+<div id="mp4-container"></div>
+<input type="text" placeholder="播放地址" id="file" style="width:400px;height:30px;" /><br />
+<input type="text" placeholder="token" id="token" style="width:400px;height:30px;" /><br />
+<button id="play" style="width:80px;height:30px;">播放</button>
+<script type="text/javascript">
+
+    var playerBtn = document.getElementById('play');
+
+    playerBtn.onclick = function () {
+        var player = cyberplayer('mp4-container').setup({
+            flashplayer : '../player/cyberplayer.flash.swf',
+            width: 500,
+            height: 260,
+            autostart: true,
+            repeat: false,
+            volume: 1000,
+            ak:"67d54f9dd99a40a0c87o046sf4ed2ea6",
+            primary: 'flash',
+            listbar: {
+                position: 'right'
+            },
+            file: document.getElementById('file').value
+        });
+
+        player.on('beforePlay', function (e) {
+           setTimeout(function(){player.setToken(e.file, document.getElementById('token').value);},1000);
+        });
+    }
+
+
+</script>
+
+</body>
+</html>

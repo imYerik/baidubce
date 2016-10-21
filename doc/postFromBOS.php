@@ -35,9 +35,9 @@ $head = array(
 //);
 $data = array(
     "bucket"=>"yerik-doc",
-    "object"=>"README.txt",
-    "title"=>"README3",
-    "format"=>"txt",
+    "object"=>"1.pdf",
+    "title"=>"1",
+    "format"=>"pdf",
 );
 $data_string = json_encode($data);
 

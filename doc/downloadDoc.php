@@ -5,14 +5,12 @@ require 'BceSign.php';
 global $g_doc_configs;
 global $my_credentials;
 
-//根据文档ID获取相应的文档信息,如状态、创建时间、标题等
-
-//$documentId="doc-ggxmftuji7p14xv";
-$documentId="doc-gihru50qhdvxhsn";
+//阅读文档
+$documentId = "doc-gihru50qhdvxhsn";
 $host= $g_doc_configs['endpoint'];
 $path = "/v2/document/".$documentId;
 $method = "GET";
-$parms = array();
+$parms = array("download"=>"");
 date_default_timezone_set('UTC');
 $timestamp = date("Y-m-d") . "T" . date("H:i:s") . "Z";
 $Authorization = getSigner($host,$method,$path, $parms, $timestamp);
@@ -22,7 +20,7 @@ $parms = $httputil->getCanonicalQueryString($parms);
 $url = "http://".$host.$path."?".$parms;
 
 $head = array(
-    "Content-Type:text/plain",
+    "Content-Type:application/json",
     //"Content-Length:{$filesize}",
     "Authorization:{$Authorization}",
     "x-bce-date:{$timestamp}",
